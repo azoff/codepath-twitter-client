@@ -1,3 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">Twitter Client</string>
+    <string name="title_activity_login">Log In to Twitter</string>
+
 </resources>
