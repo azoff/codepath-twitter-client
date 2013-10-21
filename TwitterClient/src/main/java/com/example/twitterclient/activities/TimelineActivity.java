@@ -1,8 +1,12 @@
 package com.example.twitterclient.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 import com.example.twitterclient.R;
 import com.example.twitterclient.adapters.TweetListAdapter;
@@ -26,6 +30,13 @@ public class TimelineActivity extends Activity
 	}
 
 	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.menu_compose, menu);
+		return true;
+	}
+
+	@Override
 	public void onTweetList(List<Tweet> tweets) {
 		tweetList.addAll(tweets);
 	}
@@ -36,4 +47,8 @@ public class TimelineActivity extends Activity
 		Log.e("FIXME", "Timeline Error", error);
 	}
 
+	public void compose(MenuItem item) {
+		Intent intent = new Intent(this, ComposeActivity.class);
+		startActivity(intent);
+	}
 }

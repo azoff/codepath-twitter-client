@@ -8,5 +8,7 @@
 	<string name="action_settings">Settings</string>
 	<string name="hello_world">Hello world!</string>
 	<string name="profile_photo">profile photo</string>
+	<string name="compose_tweet">Compose Tweet</string>
+	<string name="title_activity_compose">Compose Tweet</string>
 
 </resources>
