@@ -44,7 +44,7 @@ public class User extends Model {
 	}
 
 	public Spanned getSpannedName() {
-		String formatString = "<b>%s</b><small style=\"color:#777\">@%s</small>";
+		String formatString = "<b>%s</b> <small style=\"color:#777\">@%s</small>";
 		return Html.fromHtml(String.format(formatString, getName(), getScreenName()));
 	}
 

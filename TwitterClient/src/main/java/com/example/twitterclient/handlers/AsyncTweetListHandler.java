@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -29,6 +30,8 @@ public class AsyncTweetListHandler extends JsonHttpResponseHandler {
 		try {
 			handler.onTweetList(Tweet.fromJsonArray(jsonArray));
 		} catch (JSONException ex) {
+			handler.onError(ex);
+		} catch (ParseException ex) {
 			handler.onError(ex);
 		}
 	}

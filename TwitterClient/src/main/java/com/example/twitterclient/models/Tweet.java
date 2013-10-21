@@ -1,13 +1,19 @@
 package com.example.twitterclient.models;
 
+import android.text.Html;
+import android.text.Spanned;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.example.twitterclient.utils.TwitterDateUtil;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,6 +25,9 @@ public class Tweet extends Model {
 	@Column(name = "text")
 	private String text;
 
+	@Column(name = "created_date")
+	private Date created_date;
+
 	private User user;
 
 	public Tweet() {
@@ -29,18 +38,40 @@ public class Tweet extends Model {
 		return text;
 	}
 
+	public Spanned getSpannedText() {
+		return Html.fromHtml(getText());
+	}
+
+	public Date getCreatedDate() {
+		return created_date;
+	}
+
+	public String getFormattedDate(String formatString) {
+		SimpleDateFormat formatter = new SimpleDateFormat(formatString);
+		return formatter.format(getCreatedDate());
+	}
+
+	public Spanned getSpannedDate(String dateFormatString) {
+		String formatString = "<small style\"color:#888\"><em>%s</em></small>";
+		String formattedDate = getFormattedDate(dateFormatString);
+		return Html.fromHtml(String.format(formatString, formattedDate));
+	}
+
 	public User getUser() {
 		return user;
 	}
 
-	public static Tweet fromJsonObject(JSONObject jsonObject) throws JSONException {
+	public static Tweet fromJsonObject(JSONObject jsonObject)
+			throws JSONException, ParseException {
 		Tweet tweet = new Tweet();
 		tweet.text = jsonObject.getString("text");
 		tweet.user = User.fromJsonObject(jsonObject.getJSONObject("user"));
+		tweet.created_date = TwitterDateUtil.toDate(jsonObject.getString("created_at"));
 		return tweet;
 	}
 
-	public static List<Tweet> fromJsonArray(JSONArray jsonArray) throws JSONException {
+	public static List<Tweet> fromJsonArray(JSONArray jsonArray)
+			throws JSONException, ParseException {
 		List<Tweet> tweets = new ArrayList<Tweet>();
 		for (int i = 0; i < jsonArray.length(); i++)
 			tweets.add(fromJsonObject(jsonArray.getJSONObject(i)));
@@ -53,7 +84,7 @@ public class Tweet extends Model {
 {
 	"coordinates": null,
 	"truncated": false,
-	"created_at": "Tue Aug 28 21:16:23 +0000 2012",
+	"created_date": "Tue Aug 28 21:16:23 +0000 2012",
 	"favorited": false,
 	"id_str": "240558470661799936",
 	"in_reply_to_user_id_str": null,
@@ -84,7 +115,7 @@ public class Tweet extends Model {
 	  "profile_background_tile": true,
 	  "profile_sidebar_border_color": "C0DEED",
 	  "profile_image_url": "http://a0.twimg.com/profile_images/730275945/oauth-dancer_normal.jpg",
-	  "created_at": "Wed Mar 03 19:37:35 +0000 2010",
+	  "created_date": "Wed Mar 03 19:37:35 +0000 2010",
 	  "location": "San Francisco, CA",
 	  "follow_request_sent": false,
 	  "id_str": "119476949",

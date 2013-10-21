@@ -19,11 +19,17 @@
 			android:layout_height="wrap_content">
 
 		<TextView
-				android:layout_marginBottom="@dimen/lv_item_spacing"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:textAppearance="?android:attr/textAppearanceSmall"
 				android:id="@+id/tvName"/>
+
+		<TextView
+				android:layout_marginBottom="@dimen/lv_item_spacing"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textAppearance="?android:attr/textAppearanceSmall"
+				android:id="@+id/tvDate"/>
 
 		<TextView
 				android:layout_width="wrap_content"

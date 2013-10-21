@@ -18,6 +18,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
  */
 public class TweetListAdapter extends ArrayAdapter<Tweet> {
 
+	private static final String tweetDateFormat = "h:ma, MMMMM d yyyy";
+
 	private int tweetItemResourceId;
 
 	public TweetListAdapter(Activity context, int tweetItemResourceId, int tweetListResourceId) {
@@ -44,8 +46,11 @@ public class TweetListAdapter extends ArrayAdapter<Tweet> {
 			TextView tvName = (TextView) convertView.findViewById(R.id.tvName);
 			tvName.setText(user.getSpannedName());
 
+			TextView tvDate = (TextView) convertView.findViewById(R.id.tvDate);
+			tvDate.setText(tweet.getSpannedDate(tweetDateFormat));
+
 			TextView tvBody = (TextView) convertView.findViewById(R.id.tvBody);
-			tvBody.setText(tweet.getText());
+			tvBody.setText(tweet.getSpannedText());
 
 		}
 
