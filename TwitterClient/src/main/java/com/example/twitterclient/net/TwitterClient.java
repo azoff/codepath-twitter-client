@@ -12,7 +12,7 @@ import org.scribe.builder.api.TwitterApi;
 public class TwitterClient extends OAuthBaseClient {
 
 	public static final Class<? extends Api> REST_API_CLASS = TwitterApi.class; // Change this
-	public static final String REST_URL = "https://api.twitter.com"; // Change this, base API URL
+	public static final String REST_URL = "https://api.twitter.com/1.1"; // Change this, base API URL
 	public static final String REST_CONSUMER_KEY = "IAyNXfHb8xLcZgGKjhH1JA";       // Change this
 	public static final String REST_CONSUMER_SECRET = "BwhB1M7pxwRstuyK55Z9987PwXqDNo357YBJLgT4"; // Change this
 	public static final String REST_CALLBACK_URL = "oauth://twitterclient"; // Change this (here and in manifest)
@@ -24,6 +24,10 @@ public class TwitterClient extends OAuthBaseClient {
 	public void getHomeTimeline(AsyncHttpResponseHandler handler) {
 		String url = getApiUrl("statuses/home_timeline.json");
 		client.get(url, handler);
+	}
+
+	public static TwitterClient getInstance(Context context) {
+		return (TwitterClient) OAuthBaseClient.getInstance(TwitterClient.class, context);
 	}
 
     /* 1. Define the endpoint URL with getApiUrl and pass a relative path to the endpoint

@@ -1,5 +1,6 @@
 package com.example.twitterclient.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import com.codepath.oauth.OAuthLoginActivity;
@@ -12,7 +13,6 @@ public class LoginActivity extends OAuthLoginActivity<TwitterClient> {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
-		lastClient = this.getClient();
 	}
 
 	public void login(View v) {
@@ -21,18 +21,13 @@ public class LoginActivity extends OAuthLoginActivity<TwitterClient> {
 
 	@Override
 	public void onLoginSuccess() {
-
+		Intent intent = new Intent(this, TimelineActivity.class);
+		startActivity(intent);
 	}
 
 	@Override
 	public void onLoginFailure(Exception e) {
 		e.printStackTrace();
-	}
-
-	private static TwitterClient lastClient;
-
-	public static TwitterClient getLastClient() {
-		return lastClient;
 	}
 
 }
