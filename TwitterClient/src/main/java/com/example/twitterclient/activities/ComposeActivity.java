@@ -54,8 +54,9 @@ public class ComposeActivity extends Activity implements
 
 	@Override
 	public void onError(Throwable error) {
-		Log.e("ComposeActivity", "Compose Error", error);
+		Log.e("FIXME", "Compose Error", error);
 		Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
 		finish();
 	}
+
 }

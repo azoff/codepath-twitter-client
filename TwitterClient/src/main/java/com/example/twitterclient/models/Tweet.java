@@ -28,6 +28,9 @@ public class Tweet extends Model {
 	@Column(name = "created_date")
 	private Date created_date;
 
+	@Column(name = "tweet_id")
+	private Long tweet_id;
+
 	private User user;
 
 	public Tweet() {
@@ -44,6 +47,10 @@ public class Tweet extends Model {
 
 	public Date getCreatedDate() {
 		return created_date;
+	}
+
+	public Long getTweetId() {
+		return tweet_id;
 	}
 
 	public String getFormattedDate(String formatString) {
@@ -65,6 +72,7 @@ public class Tweet extends Model {
 			throws JSONException, ParseException {
 		Tweet tweet = new Tweet();
 		tweet.text = jsonObject.getString("text");
+		tweet.tweet_id = jsonObject.getLong("id");
 		tweet.user = User.fromJsonObject(jsonObject.getJSONObject("user"));
 		tweet.created_date = TwitterDateUtil.toDate(jsonObject.getString("created_at"));
 		return tweet;

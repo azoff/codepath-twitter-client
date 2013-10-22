@@ -26,7 +26,13 @@ public class TimelineActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_timeline);
 		tweetList = new TweetListAdapter(this, R.layout.lv_item_tweet, R.id.lvTweets);
-		TwitterApp.getClient().getHomeTimeline(new AsyncTweetListHandler(this));
+		getRecentTweets();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		getRecentTweets();
 	}
 
 	@Override
@@ -38,7 +44,8 @@ public class TimelineActivity extends Activity
 
 	@Override
 	public void onTweetList(List<Tweet> tweets) {
-		tweetList.addAll(tweets);
+		for (int i = tweets.size() - 1; i >= 0; i--)
+			tweetList.insert(tweets.get(i), 0);
 	}
 
 	@Override
@@ -47,7 +54,13 @@ public class TimelineActivity extends Activity
 		Log.e("FIXME", "Timeline Error", error);
 	}
 
-	public void compose(MenuItem item) {
+	public void getRecentTweets() {
+		Integer count = tweetList.getCount();
+		Tweet last = count > 0 ? tweetList.getItem(0) : null;
+		TwitterApp.getClient().getHomeTimeline(last, new AsyncTweetListHandler(this));
+	}
+
+	public void startComposeActivity(MenuItem item) {
 		Intent intent = new Intent(this, ComposeActivity.class);
 		startActivity(intent);
 	}

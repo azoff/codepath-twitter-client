@@ -4,5 +4,5 @@
 	<item android:icon="@drawable/ic_action_content_edit"
 	      android:title="@string/compose_tweet"
 	      android:showAsAction="ifRoom"
-	      android:onClick="compose"/>
+	      android:onClick="startComposeActivity"/>
 </menu>

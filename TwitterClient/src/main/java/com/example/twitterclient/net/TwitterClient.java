@@ -2,6 +2,7 @@ package com.example.twitterclient.net;
 
 import android.content.Context;
 import com.codepath.oauth.OAuthBaseClient;
+import com.example.twitterclient.models.Tweet;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import org.scribe.builder.api.Api;
@@ -23,8 +24,18 @@ public class TwitterClient extends OAuthBaseClient {
 	}
 
 	public void getHomeTimeline(JsonHttpResponseHandler handler) {
+		getHomeTimeline(null, handler);
+	}
+
+	public void getHomeTimeline(Tweet since, JsonHttpResponseHandler handler) {
 		String url = getApiUrl("statuses/home_timeline.json");
-		client.get(url, handler);
+		if (since == null) {
+			client.get(url, handler);
+		} else {
+			RequestParams params = new RequestParams();
+			params.put("since_id", since.getTweetId().toString());
+			client.get(url, params, handler);
+		}
 	}
 
 	public void updateStatus(String status, JsonHttpResponseHandler handler) {

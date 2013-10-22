@@ -4,7 +4,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import com.example.twitterclient.R;
 
 /**
  * Created on 10/21/13.
@@ -18,7 +17,7 @@ public class CharsLeftHandler implements View.OnKeyListener {
 	public CharsLeftHandler(TextView tvCharsLeft, Button btnPost) {
 		view = tvCharsLeft;
 		button = btnPost;
-		maxChars = R.string.max_chars;
+		maxChars = 140;
 	}
 
 	@Override
