@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import com.example.twitterclient.R;
 import com.example.twitterclient.models.Tweet;
@@ -22,10 +21,9 @@ public class TweetListAdapter extends ArrayAdapter<Tweet> {
 
 	private int tweetItemResourceId;
 
-	public TweetListAdapter(Activity context, int tweetItemResourceId, int tweetListResourceId) {
-		super(context, tweetItemResourceId, tweetListResourceId);
+	public TweetListAdapter(Activity context, int tweetItemResourceId) {
+		super(context, tweetItemResourceId);
 		this.tweetItemResourceId = tweetItemResourceId;
-		((ListView) context.findViewById(tweetListResourceId)).setAdapter(this);
 	}
 
 	@Override

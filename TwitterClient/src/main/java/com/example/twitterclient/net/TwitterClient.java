@@ -23,19 +23,18 @@ public class TwitterClient extends OAuthBaseClient {
 		super(context, REST_API_CLASS, REST_URL, REST_CONSUMER_KEY, REST_CONSUMER_SECRET, REST_CALLBACK_URL);
 	}
 
-	public void getHomeTimeline(JsonHttpResponseHandler handler) {
-		getHomeTimeline(null, handler);
-	}
-
-	public void getHomeTimeline(Tweet since, JsonHttpResponseHandler handler) {
+	public void getHomeTimeline(Tweet before, Tweet after, JsonHttpResponseHandler handler) {
 		String url = getApiUrl("statuses/home_timeline.json");
-		if (since == null) {
-			client.get(url, handler);
-		} else {
-			RequestParams params = new RequestParams();
-			params.put("since_id", since.getTweetId().toString());
-			client.get(url, params, handler);
+		RequestParams params = new RequestParams();
+		params.put("count", "25");
+		if (before != null) {
+			params.put("since_id", before.getTweetId().toString());
 		}
+		if (after != null) {
+			Long maxId = after.getTweetId() - 1;
+			params.put("max_id", maxId.toString());
+		}
+		client.get(url, params, handler);
 	}
 
 	public void updateStatus(String status, JsonHttpResponseHandler handler) {

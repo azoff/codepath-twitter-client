@@ -16,19 +16,21 @@ import java.util.List;
 public class AsyncTweetListHandler extends JsonHttpResponseHandler {
 
 	public static interface HandlesTweetList extends HandlesErrors {
-		public void onTweetList(List<Tweet> tweets);
+		public void onTweetList(List<Tweet> tweets, boolean prepend);
 	}
 
+	private final boolean prepend;
 	private HandlesTweetList handler;
 
-	public AsyncTweetListHandler(HandlesTweetList handler) {
+	public AsyncTweetListHandler(HandlesTweetList handler, boolean prepend) {
 		this.handler = handler;
+		this.prepend = prepend;
 	}
 
 	@Override
 	public void onSuccess(JSONArray jsonArray) {
 		try {
-			handler.onTweetList(Tweet.fromJsonArray(jsonArray));
+			handler.onTweetList(Tweet.fromJsonArray(jsonArray), prepend);
 		} catch (JSONException ex) {
 			handler.onError(ex);
 		} catch (ParseException ex) {
