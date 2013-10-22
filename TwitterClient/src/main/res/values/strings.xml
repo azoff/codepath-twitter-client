@@ -10,5 +10,9 @@
 	<string name="profile_photo">profile photo</string>
 	<string name="compose_tweet">Compose Tweet</string>
 	<string name="title_activity_compose">Compose Tweet</string>
+	<string name="enter_your_tweet">Enter your tweet...</string>
+	<string name="max_chars">140</string>
+	<string name="post_tweet">Post Tweet</string>
+	<string name="post">Post</string>
 
 </resources>

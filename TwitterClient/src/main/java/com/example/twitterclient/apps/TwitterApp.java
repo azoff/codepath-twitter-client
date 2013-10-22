@@ -33,7 +33,6 @@ public class TwitterApp extends Application {
 		// set the ImageLoader configuration
 		ImageLoader.getInstance().init(config);
 
-
 	}
 
 	public static TwitterClient getClient() {

@@ -8,4 +8,36 @@
                 android:paddingBottom="@dimen/activity_vertical_margin"
                 tools:context=".activites.ComposeActivity">
 
+	<EditText
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/etTweetText"
+			android:layout_alignParentTop="true"
+			android:hint="@string/enter_your_tweet"
+			android:imeActionLabel="@string/post"
+			/>
+
+	<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textAppearance="?android:attr/textAppearanceSmall"
+			android:text="@string/max_chars"
+			android:id="@+id/tvCharsLeft"
+			android:layout_below="@+id/etTweetText"
+			android:layout_alignRight="@+id/etTweetText"
+			/>
+
+	<Button
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:text="@string/post_tweet"
+			android:id="@+id/btnPost"
+			android:layout_alignParentEnd="false"
+			android:layout_below="@+id/tvCharsLeft"
+			android:layout_alignRight="@+id/tvCharsLeft"
+			android:layout_marginTop="20dp"
+			android:onClick="updateStatus"
+			android:enabled="false"
+			/>
+
 </RelativeLayout>

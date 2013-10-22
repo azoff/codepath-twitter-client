@@ -2,7 +2,8 @@ package com.example.twitterclient.net;
 
 import android.content.Context;
 import com.codepath.oauth.OAuthBaseClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import org.scribe.builder.api.Api;
 import org.scribe.builder.api.TwitterApi;
 
@@ -21,9 +22,16 @@ public class TwitterClient extends OAuthBaseClient {
 		super(context, REST_API_CLASS, REST_URL, REST_CONSUMER_KEY, REST_CONSUMER_SECRET, REST_CALLBACK_URL);
 	}
 
-	public void getHomeTimeline(AsyncHttpResponseHandler handler) {
+	public void getHomeTimeline(JsonHttpResponseHandler handler) {
 		String url = getApiUrl("statuses/home_timeline.json");
 		client.get(url, handler);
+	}
+
+	public void updateStatus(String status, JsonHttpResponseHandler handler) {
+		String url = getApiUrl("statuses/update.json");
+		RequestParams params = new RequestParams();
+		params.put("status", status);
+		client.post(url, params, handler);
 	}
 
 	public static TwitterClient getInstance(Context context) {
@@ -36,6 +44,6 @@ public class TwitterClient extends OAuthBaseClient {
      *    i.e RequestParams params = new RequestParams("foo", "bar");
      * 3. Define the request method and make a call to the client
      *    i.e client.get(apiUrl, params, handler);
-     *    i.e client.post(apiUrl, params, handler);
+     *    i.e client.postTweet(apiUrl, params, handler);
      */
 }
