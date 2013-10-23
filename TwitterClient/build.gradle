@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.5.+'
+        classpath 'com.android.tools.build:gradle:0.4.+'
     }
 }
 apply plugin: 'android'
@@ -24,10 +24,6 @@ android {
 
 dependencies {
     compile 'com.android.support:appcompat-v7:18.0.0'
-    compile files('libs/activeandroid-3.0.jar')
-    compile files('libs/android-async-http-1.4.3.jar')
-    compile files('libs/codepath-oauth-0.2.4.jar')
-    compile files('libs/codepath-utils.jar')
-    compile files('libs/scribe.jar')
-    compile files('libs/universal-image-loader-1.8.4.jar')
+    compile project(':Libraries:PullToRefresh')
+    compile fileTree(dir: 'libs', include: '*.jar')
 }

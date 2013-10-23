@@ -7,23 +7,24 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.ListView;
 import android.widget.Toast;
 import com.example.twitterclient.R;
 import com.example.twitterclient.adapters.TweetListAdapter;
 import com.example.twitterclient.apps.TwitterApp;
-import com.example.twitterclient.handlers.AppendTweetsHandler;
 import com.example.twitterclient.handlers.AsyncTweetListHandler;
+import com.example.twitterclient.handlers.LoadTweetHandler;
 import com.example.twitterclient.models.Tweet;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import java.util.List;
 
 public class TimelineActivity extends Activity implements
 		AsyncTweetListHandler.HandlesTweetList,
-		AppendTweetsHandler.CanLoadTweets {
+		LoadTweetHandler.CanLoadTweets {
 
 	private TweetListAdapter tweetList;
+	private PullToRefreshListView lvTweets;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +32,11 @@ public class TimelineActivity extends Activity implements
 		setContentView(R.layout.activity_timeline);
 		tweetList = new TweetListAdapter(this, R.layout.lv_item_tweet);
 
-		ListView lvTweets = (ListView) findViewById(R.id.lvTweets);
+		LoadTweetHandler handler = new LoadTweetHandler(this);
+		lvTweets = (PullToRefreshListView) findViewById(R.id.lvTweets);
+		lvTweets.setOnLastItemVisibleListener(handler);
+		lvTweets.setOnRefreshListener(handler);
 		lvTweets.setAdapter(tweetList);
-		lvTweets.setOnScrollListener(new AppendTweetsHandler(this, tweetList));
 
 		loadTweets(null, null);
 
@@ -63,8 +66,12 @@ public class TimelineActivity extends Activity implements
 
 	@Override
 	public void onTweetList(List<Tweet> tweets, boolean prepend) {
-		if (prepend) prependTweets(tweets);
-		else appendTweets(tweets);
+		if (prepend) {
+			prependTweets(tweets);
+			lvTweets.onRefreshComplete();
+		} else {
+			appendTweets(tweets);
+		}
 	}
 
 	@Override
