@@ -1,5 +1,6 @@
 package com.example.twitterclient.apps;
 
+import com.activeandroid.ActiveAndroid;
 import com.activeandroid.app.Application;
 import com.example.twitterclient.net.TwitterClient;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -17,7 +18,9 @@ public class TwitterApp extends Application {
 	public void onCreate() {
 
 		super.onCreate();
-		context = this;
+
+		// start the database
+		ActiveAndroid.initialize(context = this);
 
 		// create default options, enabling caching...
 		DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
@@ -33,6 +36,12 @@ public class TwitterApp extends Application {
 		// set the ImageLoader configuration
 		ImageLoader.getInstance().init(config);
 
+	}
+
+	@Override
+	public void onTerminate() {
+		super.onTerminate();
+		ActiveAndroid.dispose();
 	}
 
 	public static TwitterClient getClient() {

@@ -5,12 +5,8 @@ import android.text.Spanned;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created on 10/20/13.
@@ -19,33 +15,21 @@ import java.util.List;
 public class User extends Model {
 
 	@Column(name = "name")
-	private String name;
+	public String name;
 
 	@Column(name = "profile_image_url")
-	private String profile_image_url;
+	public String profile_image_url;
 
 	@Column(name = "screen_name")
-	private String screen_name;
+	public String screen_name;
 
 	public User() {
 		super();
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public String getScreenName() {
-		return screen_name;
-	}
-
-	public String getProfileImageUrl() {
-		return profile_image_url;
-	}
-
 	public Spanned getSpannedName() {
 		String formatString = "<b>%s</b> <small style=\"color:#777\">@%s</small>";
-		return Html.fromHtml(String.format(formatString, getName(), getScreenName()));
+		return Html.fromHtml(String.format(formatString, name, screen_name));
 	}
 
 	public static User fromJsonObject(JSONObject jsonObject) throws JSONException {
@@ -53,16 +37,9 @@ public class User extends Model {
 		user.name = jsonObject.getString("name");
 		user.screen_name = jsonObject.getString("screen_name");
 		user.profile_image_url = jsonObject.getString("profile_image_url");
+		user.save();
 		return user;
 	}
-
-	public static List<User> fromJsonArray(JSONArray jsonArray) throws JSONException {
-		List<User> users = new ArrayList<User>();
-		for (int i = 0; i < jsonArray.length(); i++)
-			users.add(fromJsonObject(jsonArray.getJSONObject(i)));
-		return users;
-	}
-
 }
 /*
 {

@@ -38,13 +38,14 @@ public class TimelineActivity extends Activity implements
 		lvTweets.setOnRefreshListener(handler);
 		lvTweets.setAdapter(tweetList);
 
-		loadTweets(null, null);
+		if (!recallTweets())
+			loadTweets(null, null);
 
 	}
 
 	@Override
-	protected void onResume() {
-		super.onResume();
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
 		loadRecentTweets();
 	}
 
@@ -98,6 +99,13 @@ public class TimelineActivity extends Activity implements
 	public void loadTweets(Tweet loadBefore, Tweet loadAfter) {
 		JsonHttpResponseHandler handler = new AsyncTweetListHandler(this, loadBefore != null);
 		TwitterApp.getClient().getHomeTimeline(loadBefore, loadAfter, handler);
+	}
+
+	public boolean recallTweets() {
+		List<Tweet> tweets = Tweet.selectRecent(25);
+		if (tweets.size() <= 0) return false;
+		appendTweets(tweets);
+		return true;
 	}
 
 	public void startComposeActivity(MenuItem item) {

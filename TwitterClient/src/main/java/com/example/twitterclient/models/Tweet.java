@@ -2,9 +2,11 @@ package com.example.twitterclient.models;
 
 import android.text.Html;
 import android.text.Spanned;
+import com.activeandroid.ActiveAndroid;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Select;
 import com.example.twitterclient.utils.TwitterDateUtil;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,39 +25,28 @@ import java.util.List;
 public class Tweet extends Model {
 
 	@Column(name = "text")
-	private String text;
+	public String text;
 
 	@Column(name = "created_date")
-	private Date created_date;
+	public Date created_date;
 
 	@Column(name = "tweet_id")
-	private Long tweet_id;
+	public Long tweet_id;
 
-	private User user;
+	@Column(name = "user")
+	public User user;
 
 	public Tweet() {
 		super();
 	}
 
-	public String getText() {
-		return text;
-	}
-
 	public Spanned getSpannedText() {
-		return Html.fromHtml(getText());
-	}
-
-	public Date getCreatedDate() {
-		return created_date;
-	}
-
-	public Long getTweetId() {
-		return tweet_id;
+		return Html.fromHtml(text);
 	}
 
 	public String getFormattedDate(String formatString) {
 		SimpleDateFormat formatter = new SimpleDateFormat(formatString);
-		return formatter.format(getCreatedDate());
+		return formatter.format(created_date);
 	}
 
 	public Spanned getSpannedDate(String dateFormatString) {
@@ -64,28 +55,36 @@ public class Tweet extends Model {
 		return Html.fromHtml(String.format(formatString, formattedDate));
 	}
 
-	public User getUser() {
-		return user;
-	}
-
 	public static Tweet fromJsonObject(JSONObject jsonObject)
 			throws JSONException, ParseException {
 		Tweet tweet = new Tweet();
+		User user = User.fromJsonObject(jsonObject.getJSONObject("user"));
 		tweet.text = jsonObject.getString("text");
 		tweet.tweet_id = jsonObject.getLong("id");
-		tweet.user = User.fromJsonObject(jsonObject.getJSONObject("user"));
+		tweet.user = user;
 		tweet.created_date = TwitterDateUtil.toDate(jsonObject.getString("created_at"));
+		tweet.save();
 		return tweet;
 	}
 
 	public static List<Tweet> fromJsonArray(JSONArray jsonArray)
 			throws JSONException, ParseException {
+		ActiveAndroid.beginTransaction();
 		List<Tweet> tweets = new ArrayList<Tweet>();
 		for (int i = 0; i < jsonArray.length(); i++)
 			tweets.add(fromJsonObject(jsonArray.getJSONObject(i)));
+		ActiveAndroid.setTransactionSuccessful();
+		ActiveAndroid.endTransaction();
 		return tweets;
 	}
 
+	public static List<Tweet> selectRecent(int limit) {
+		return new Select()
+				.from(Tweet.class)
+				.orderBy("created_date DESC")
+				.limit(String.valueOf(limit))
+				.execute();
+	}
 }
 
 /*

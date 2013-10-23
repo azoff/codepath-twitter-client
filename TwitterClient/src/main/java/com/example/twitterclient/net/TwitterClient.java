@@ -28,10 +28,10 @@ public class TwitterClient extends OAuthBaseClient {
 		RequestParams params = new RequestParams();
 		params.put("count", "25");
 		if (before != null) {
-			params.put("since_id", before.getTweetId().toString());
+			params.put("since_id", before.tweet_id.toString());
 		}
 		if (after != null) {
-			Long maxId = after.getTweetId() - 1;
+			Long maxId = after.tweet_id - 1;
 			params.put("max_id", maxId.toString());
 		}
 		client.get(url, params, handler);

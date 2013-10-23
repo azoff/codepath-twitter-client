@@ -36,10 +36,10 @@ public class TweetListAdapter extends ArrayAdapter<Tweet> {
 
 		if (convertView != null) {
 
-			User user = tweet.getUser();
+			User user = tweet.user;
 
 			ImageView ivProfile = (ImageView) convertView.findViewById(R.id.ivProfile);
-			ImageLoader.getInstance().displayImage(user.getProfileImageUrl(), ivProfile);
+			ImageLoader.getInstance().displayImage(user.profile_image_url, ivProfile);
 
 			TextView tvName = (TextView) convertView.findViewById(R.id.tvName);
 			tvName.setText(user.getSpannedName());
