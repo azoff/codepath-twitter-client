@@ -15,6 +15,7 @@ import org.json.JSONObject;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -85,6 +86,16 @@ public class Tweet extends Model {
 				.limit(String.valueOf(limit))
 				.execute();
 	}
+
+	public static class ByDateCreatedDesc implements Comparator<Tweet> {
+
+		@Override
+		public int compare(Tweet lhs, Tweet rhs) {
+			return rhs.created_date.compareTo(lhs.created_date);
+		}
+
+	}
+
 }
 
 /*

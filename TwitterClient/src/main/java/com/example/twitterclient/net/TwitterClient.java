@@ -2,6 +2,7 @@ package com.example.twitterclient.net;
 
 import android.content.Context;
 import com.codepath.oauth.OAuthBaseClient;
+import com.example.twitterclient.R;
 import com.example.twitterclient.models.Tweet;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -24,9 +25,17 @@ public class TwitterClient extends OAuthBaseClient {
 	}
 
 	public void getHomeTimeline(Tweet before, Tweet after, JsonHttpResponseHandler handler) {
-		String url = getApiUrl("statuses/home_timeline.json");
+		getTimeline("home", before, after, handler);
+	}
+
+	public void getMentionsTimeline(Tweet before, Tweet after, JsonHttpResponseHandler handler) {
+		getTimeline("mentions", before, after, handler);
+	}
+
+	private void getTimeline(String timeline, Tweet before, Tweet after, JsonHttpResponseHandler handler) {
+		String url = getApiUrl(String.format("statuses/%s_timeline.json", timeline));
 		RequestParams params = new RequestParams();
-		params.put("count", "25");
+		params.put("count", String.valueOf(R.integer.page_size));
 		if (before != null) {
 			params.put("since_id", before.tweet_id.toString());
 		}
