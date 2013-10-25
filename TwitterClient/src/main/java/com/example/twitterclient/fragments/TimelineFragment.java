@@ -43,6 +43,18 @@ public class TimelineFragment extends Fragment implements
 		this.errorHandler = errorHandler;
 	}
 
+	public String getName() {
+		if (timelineType.equals(TimelineType.HOME))
+			return getString(R.string.home);
+		else if (timelineType.equals(TimelineType.MENTIONS))
+			return getString(R.string.mentions);
+		return null;
+	}
+
+	public int getIconResource() {
+		return android.R.drawable.ic_menu_search;
+	}
+
 	public void loadNewerTweets() {
 		Tweet loadBefore = null;
 		if (listAdapter.getCount() > 0)

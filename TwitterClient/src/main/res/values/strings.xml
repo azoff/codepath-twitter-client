@@ -14,5 +14,7 @@
 	<string name="max_chars">140</string>
 	<string name="post_tweet">Post Tweet</string>
 	<string name="post">Post</string>
+	<string name="home">Home</string>
+	<string name="mentions">Mentions</string>
 
 </resources>

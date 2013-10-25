@@ -1,1 +1,1 @@
-include ':TwitterClient', ':Libraries:PullToRefresh'
+include ':TwitterClient', ':Libraries:PullToRefresh', ':Libraries:ActionBarSherlock'

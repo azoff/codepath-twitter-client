@@ -78,6 +78,7 @@
     <orderEntry type="library" exported="" name="codepath-utils" level="project" />
     <orderEntry type="library" exported="" name="scribe" level="project" />
     <orderEntry type="module" module-name="PullToRefresh" exported="" />
+    <orderEntry type="module" module-name="ActionBarSherlock" exported="" />
   </component>
 </module>
 

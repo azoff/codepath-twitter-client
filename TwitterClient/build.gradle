@@ -25,5 +25,6 @@ android {
 dependencies {
     compile 'com.android.support:appcompat-v7:18.0.0'
     compile project(':Libraries:PullToRefresh')
+    compile project(':Libraries:ActionBarSherlock')
     compile fileTree(dir: 'libs', include: '*.jar')
 }

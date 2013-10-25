@@ -2,65 +2,70 @@ package com.example.twitterclient.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
 import com.example.twitterclient.R;
 import com.example.twitterclient.fragments.TimelineFragment;
 import com.example.twitterclient.utils.HandlesErrors;
 
-public class TimelineActivity extends FragmentActivity implements HandlesErrors {
+public class TimelineActivity extends SherlockFragmentActivity implements
+		ActionBar.TabListener,
+		HandlesErrors {
 
-	TimelineFragment homeTimelineFragment;
-	TimelineFragment mentionsTimelineFragment;
-	TimelineFragment currentTimelineFragment;
-
-	public void showHomeTimelineFragment() {
-		getSupportFragmentManager().beginTransaction()
-				.replace(R.id.timelineLayout, homeTimelineFragment)
-				.commit();
-		markAsCurrentTimelineFragment(homeTimelineFragment);
-	}
-
-	public void showMentionsTimelineFragment() {
-		getSupportFragmentManager().beginTransaction()
-				.replace(R.id.timelineLayout, mentionsTimelineFragment)
-				.commit();
-		markAsCurrentTimelineFragment(mentionsTimelineFragment);
-	}
-
-	public void markAsCurrentTimelineFragment(TimelineFragment currentTimelineFragment) {
-		this.currentTimelineFragment = currentTimelineFragment;
-	}
+	TimelineFragment activeFragment;
 
 	public void startComposeActivity(MenuItem item) {
 		Intent intent = new Intent(this, ComposeActivity.class);
 		startActivity(intent);
 	}
 
+	public void createTabs(Bundle savedInstanceState) {
+
+		ActionBar actionBar = getSupportActionBar();
+		if (actionBar == null) return;
+
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		actionBar.setDisplayShowTitleEnabled(true);
+		actionBar.setDisplayShowHomeEnabled(true);
+
+		for (TimelineFragment.TimelineType type : TimelineFragment.TimelineType.values()) {
+			TimelineFragment tag = new TimelineFragment(type, this);
+			actionBar.addTab(actionBar
+					.newTab().setText(tag.getName())
+					.setIcon(tag.getIconResource())
+					.setTag(tag)
+					.setTabListener(this)
+			);
+		}
+
+		if (savedInstanceState == null)
+			actionBar.selectTab(actionBar.getTabAt(0));
+
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_timeline);
-		homeTimelineFragment = new TimelineFragment(TimelineFragment.TimelineType.HOME, this);
-		mentionsTimelineFragment = new TimelineFragment(TimelineFragment.TimelineType.MENTIONS, this);
-		if (savedInstanceState == null)
-			showHomeTimelineFragment();
+		createTabs(savedInstanceState);
 	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		this.currentTimelineFragment.loadNewerTweets();
+		activeFragment.loadNewerTweets();
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.menu_compose, menu);
+		//inflater.inflate(R.menu.menu_compose, menu);
 		return true;
 	}
 
@@ -70,4 +75,19 @@ public class TimelineActivity extends FragmentActivity implements HandlesErrors 
 		Log.e("FIXME", "TimelineType Error", error);
 	}
 
+	@Override
+	public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+		TimelineFragment fragment = (TimelineFragment) tab.getTag();
+		ft.replace(R.id.timelineLayout, fragment).commit();
+		activeFragment = fragment;
+	}
+
+	@Override
+	public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+	}
+
+	@Override
+	public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+		onTabSelected(tab, ft);
+	}
 }
