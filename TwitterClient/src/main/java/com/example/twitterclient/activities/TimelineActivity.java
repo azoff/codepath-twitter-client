@@ -4,12 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
 import com.example.twitterclient.R;
 import com.example.twitterclient.fragments.TimelineFragment;
 import com.example.twitterclient.utils.HandlesErrors;
@@ -64,8 +64,8 @@ public class TimelineActivity extends SherlockFragmentActivity implements
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
-		//inflater.inflate(R.menu.menu_compose, menu);
+		MenuInflater inflater = getSupportMenuInflater();
+		inflater.inflate(R.menu.menu_compose, menu);
 		return true;
 	}
 
