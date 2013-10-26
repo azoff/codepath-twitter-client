@@ -4,12 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
-import android.view.MenuItem;
 import android.widget.Toast;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 import com.example.twitterclient.R;
 import com.example.twitterclient.fragments.TimelineFragment;
 import com.example.twitterclient.utils.HandlesErrors;
@@ -37,10 +37,9 @@ public class TimelineActivity extends SherlockFragmentActivity implements
 		for (TimelineFragment.TimelineType type : TimelineFragment.TimelineType.values()) {
 			TimelineFragment tag = new TimelineFragment(type, this);
 			actionBar.addTab(actionBar
-					.newTab().setText(tag.getName())
-					.setIcon(tag.getIconResource())
-					.setTag(tag)
-					.setTabListener(this)
+					.newTab().setText(TimelineFragment.getNameResource(type))
+					.setIcon(TimelineFragment.getIconResource(type))
+					.setTag(tag).setTabListener(this)
 			);
 		}
 
@@ -78,7 +77,7 @@ public class TimelineActivity extends SherlockFragmentActivity implements
 	@Override
 	public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
 		TimelineFragment fragment = (TimelineFragment) tab.getTag();
-		ft.replace(R.id.timelineLayout, fragment).commit();
+		ft.replace(R.id.timelineLayout, fragment);
 		activeFragment = fragment;
 	}
 
@@ -88,6 +87,5 @@ public class TimelineActivity extends SherlockFragmentActivity implements
 
 	@Override
 	public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
-		onTabSelected(tab, ft);
 	}
 }

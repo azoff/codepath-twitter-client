@@ -35,24 +35,24 @@ public class TimelineFragment extends Fragment implements
 		HOME, MENTIONS
 	}
 
+	public static int getNameResource(TimelineType type) {
+		if (type.equals(TimelineType.HOME))
+			return R.string.home;
+		else if (type.equals(TimelineType.MENTIONS))
+			return R.string.mentions;
+		return -1;
+	}
+
+	public static int getIconResource(TimelineType type) {
+		return android.R.drawable.ic_menu_search;
+	}
+
 	final TimelineType timelineType;
 	final HandlesErrors errorHandler;
 
 	public TimelineFragment(TimelineType timelineType, HandlesErrors errorHandler) {
 		this.timelineType = timelineType;
 		this.errorHandler = errorHandler;
-	}
-
-	public String getName() {
-		if (timelineType.equals(TimelineType.HOME))
-			return getString(R.string.home);
-		else if (timelineType.equals(TimelineType.MENTIONS))
-			return getString(R.string.mentions);
-		return null;
-	}
-
-	public int getIconResource() {
-		return android.R.drawable.ic_menu_search;
 	}
 
 	public void loadNewerTweets() {
@@ -85,8 +85,8 @@ public class TimelineFragment extends Fragment implements
 	}
 
 	@Override
-	public void onStart() {
-		super.onStart();
+	public void onResume() {
+		super.onResume();
 		loadNewerTweets();
 	}
 
