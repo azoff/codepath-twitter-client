@@ -23,30 +23,44 @@ public class TweetListAdapter extends ArrayAdapter<Tweet> {
 
 	private static final String tweetDateFormat = "h:ma, MMMMM d yyyy";
 
-	final HandlesErrors errorHandler;
+	public static interface HandlesTweet extends HandlesErrors {
+		public User getCurrentUser();
 
-	public TweetListAdapter(Context context, HandlesErrors errorHandler) {
+		public void onProfileClick(User user);
+
+		public void onReplyClick(Tweet tweet);
+	}
+
+	final HandlesTweet tweetHandler;
+
+	public TweetListAdapter(Context context, HandlesTweet tweetHandler) {
 		super(context, tweetResource);
-		this.errorHandler = errorHandler;
+		this.tweetHandler = tweetHandler;
 	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
-		Tweet tweet = this.getItem(position);
+		final Tweet tweet = this.getItem(position);
 
 		if (convertView == null) // only create the view if not recycling
 			convertView = LayoutInflater.from(getContext()).inflate(tweetResource, parent, false);
 
 		if (convertView == null) {
-			errorHandler.onError(new InflateException("Unable to inflate tweet view"));
+			tweetHandler.onError(new InflateException("Unable to inflate tweet view"));
 			return null;
 		}
 
-		User user = tweet.user;
+		final User user = tweet.getUser();
 
 		ImageView ivProfile = (ImageView) convertView.findViewById(R.id.ivProfile);
 		ImageLoader.getInstance().displayImage(user.profile_image_url, ivProfile);
+		ivProfile.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				tweetHandler.onProfileClick(user);
+			}
+		});
 
 		TextView tvName = (TextView) convertView.findViewById(R.id.tvName);
 		tvName.setText(user.getSpannedName());
@@ -54,9 +68,23 @@ public class TweetListAdapter extends ArrayAdapter<Tweet> {
 		TextView tvDate = (TextView) convertView.findViewById(R.id.tvDate);
 		tvDate.setText(tweet.getSpannedDate(tweetDateFormat));
 
+		TextView tvReply = (TextView) convertView.findViewById(R.id.tvReply);
+		if (tweetHandler.getCurrentUser().user_id.equals(user.user_id)) {
+			tvReply.setVisibility(View.INVISIBLE);
+		} else {
+			tvReply.setVisibility(View.VISIBLE);
+			tvReply.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					tweetHandler.onReplyClick(tweet);
+				}
+			});
+		}
+
 		TextView tvBody = (TextView) convertView.findViewById(R.id.tvBody);
 		tvBody.setText(tweet.getSpannedText());
 
 		return convertView;
+
 	}
 }

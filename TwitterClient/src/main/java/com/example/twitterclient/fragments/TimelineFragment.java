@@ -13,8 +13,8 @@ import com.example.twitterclient.adapters.TweetListAdapter;
 import com.example.twitterclient.apps.TwitterApp;
 import com.example.twitterclient.handlers.AsyncTweetListHandler;
 import com.example.twitterclient.models.Tweet;
+import com.example.twitterclient.models.User;
 import com.example.twitterclient.net.TwitterClient;
-import com.example.twitterclient.utils.HandlesErrors;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
@@ -26,13 +26,14 @@ import java.util.List;
 public class TimelineFragment extends Fragment implements
 		PullToRefreshBase.OnRefreshListener<ListView>,
 		PullToRefreshBase.OnLastItemVisibleListener,
-		AsyncTweetListHandler.OnTweetListListener {
+		AsyncTweetListHandler.OnTweetListListener,
+		TweetListAdapter.HandlesTweet {
 
-	PullToRefreshListView listView;
 	TweetListAdapter listAdapter;
+	PullToRefreshListView listView;
 
 	public static enum TimelineType {
-		HOME, MENTIONS
+		HOME, MENTIONS, USER
 	}
 
 	public static int getNameResource(TimelineType type) {
@@ -40,19 +41,50 @@ public class TimelineFragment extends Fragment implements
 			return R.string.home;
 		else if (type.equals(TimelineType.MENTIONS))
 			return R.string.mentions;
+		else if (type.equals(TimelineType.USER))
+			return R.string.profile;
 		return -1;
 	}
 
 	public static int getIconResource(TimelineType type) {
-		return android.R.drawable.ic_menu_search;
+		if (type.equals(TimelineType.HOME))
+			return R.drawable.ic_home_symbol;
+		else if (type.equals(TimelineType.MENTIONS))
+			return R.drawable.ic_at_symbol;
+		else if (type.equals(TimelineType.USER))
+			return R.drawable.ic_action_profile;
+		return -1;
 	}
 
+	final User user;
 	final TimelineType timelineType;
-	final HandlesErrors errorHandler;
+	private TweetListAdapter.HandlesTweet tweetHandler;
 
-	public TimelineFragment(TimelineType timelineType, HandlesErrors errorHandler) {
-		this.timelineType = timelineType;
-		this.errorHandler = errorHandler;
+	public TimelineFragment(TimelineType type) {
+		this.user = null;
+		this.timelineType = type;
+	}
+
+	public TimelineFragment(User user) {
+		this.user = user;
+		timelineType = TimelineType.USER;
+	}
+
+	public void setTweetHandler(TweetListAdapter.HandlesTweet tweetHandler) {
+		this.tweetHandler = tweetHandler;
+	}
+
+	public void recallLastTweets() {
+		List<Tweet> tweets = null;
+		Integer limit = Integer.valueOf(getString(R.integer.page_size));
+		if (timelineType == TimelineType.HOME)
+			tweets = Tweet.getRecentTweets(limit);
+		else if (timelineType == TimelineType.MENTIONS)
+			tweets = Tweet.getRecentMentions(limit);
+		else if (timelineType == TimelineType.USER)
+			tweets = Tweet.getRecentUserTweets(limit, user);
+		if (tweets != null)
+			onTweetList(tweets);
 	}
 
 	public void loadNewerTweets() {
@@ -73,10 +105,13 @@ public class TimelineFragment extends Fragment implements
 	public void loadTweets(Tweet loadBefore, Tweet loadAfter) {
 		TwitterClient client = TwitterApp.getClient();
 		AsyncTweetListHandler handler = new AsyncTweetListHandler(this);
+		Integer count = Integer.valueOf(getString(R.integer.page_size));
 		if (timelineType == TimelineType.HOME)
-			client.getHomeTimeline(loadBefore, loadAfter, handler);
+			client.getHomeTimeline(count, loadBefore, loadAfter, handler);
 		else if (timelineType == TimelineType.MENTIONS)
-			client.getMentionsTimeline(loadBefore, loadAfter, handler);
+			client.getMentionsTimeline(count, loadBefore, loadAfter, handler);
+		else if (timelineType == TimelineType.USER)
+			client.getUserTimeline(count, user, loadBefore, loadAfter, handler);
 	}
 
 	public void endRefresh() {
@@ -87,12 +122,16 @@ public class TimelineFragment extends Fragment implements
 	@Override
 	public void onResume() {
 		super.onResume();
+		recallLastTweets();
 		loadNewerTweets();
 	}
 
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
+		if (!(activity instanceof TweetListAdapter.HandlesTweet))
+			throw new IllegalArgumentException("Activity must be able to handle Timeline tweets");
+		setTweetHandler((TweetListAdapter.HandlesTweet) activity);
 		listAdapter = new TweetListAdapter(activity, this);
 	}
 
@@ -122,6 +161,11 @@ public class TimelineFragment extends Fragment implements
 	}
 
 	@Override
+	public User getCurrentUser() {
+		return tweetHandler.getCurrentUser();
+	}
+
+	@Override
 	public void onLastItemVisible() {
 		loadOlderTweets();
 	}
@@ -134,7 +178,16 @@ public class TimelineFragment extends Fragment implements
 	@Override
 	public void onError(Throwable error) {
 		endRefresh();
-		errorHandler.onError(error);
+		tweetHandler.onError(error);
 	}
 
+	@Override
+	public void onProfileClick(User user) {
+		tweetHandler.onProfileClick(user);
+	}
+
+	@Override
+	public void onReplyClick(Tweet tweet) {
+		tweetHandler.onReplyClick(tweet);
+	}
 }

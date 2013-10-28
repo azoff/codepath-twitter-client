@@ -3,6 +3,7 @@ package com.example.twitterclient.net;
 import android.content.Context;
 import com.codepath.oauth.OAuthBaseClient;
 import com.example.twitterclient.models.Tweet;
+import com.example.twitterclient.models.User;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import org.scribe.builder.api.Api;
@@ -23,18 +24,25 @@ public class TwitterClient extends OAuthBaseClient {
 		super(context, REST_API_CLASS, REST_URL, REST_CONSUMER_KEY, REST_CONSUMER_SECRET, REST_CALLBACK_URL);
 	}
 
-	public void getHomeTimeline(Tweet before, Tweet after, JsonHttpResponseHandler handler) {
-		getTimeline("home", before, after, handler);
+	public void getHomeTimeline(Integer count, Tweet before, Tweet after, JsonHttpResponseHandler handler) {
+		getTimeline("home", count, null, before, after, handler);
 	}
 
-	public void getMentionsTimeline(Tweet before, Tweet after, JsonHttpResponseHandler handler) {
-		getTimeline("mentions", before, after, handler);
+	public void getMentionsTimeline(Integer count, Tweet before, Tweet after, JsonHttpResponseHandler handler) {
+		getTimeline("mentions", count, null, before, after, handler);
 	}
 
-	private void getTimeline(String timeline, Tweet before, Tweet after, JsonHttpResponseHandler handler) {
+	public void getUserTimeline(Integer count, User user, Tweet before, Tweet after, JsonHttpResponseHandler handler) {
+		getTimeline("user", count, user, before, after, handler);
+	}
+
+	private void getTimeline(String timeline, Integer count, User user, Tweet before, Tweet after, JsonHttpResponseHandler handler) {
 		String url = getApiUrl(String.format("statuses/%s_timeline.json", timeline));
 		RequestParams params = new RequestParams();
-		params.put("count", "25");
+		params.put("count", count.toString());
+		if (user != null) {
+			params.put("user_id", user.user_id.toString());
+		}
 		if (before != null) {
 			params.put("since_id", before.tweet_id.toString());
 		}
@@ -50,6 +58,11 @@ public class TwitterClient extends OAuthBaseClient {
 		RequestParams params = new RequestParams();
 		params.put("status", status);
 		client.post(url, params, handler);
+	}
+
+	public void verifyCredentials(JsonHttpResponseHandler handler) {
+		String url = getApiUrl("account/verify_credentials.json");
+		client.get(url, handler);
 	}
 
 	public static TwitterClient getInstance(Context context) {

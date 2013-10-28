@@ -10,12 +10,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.activeandroid.Model;
 import com.example.twitterclient.R;
 import com.example.twitterclient.apps.TwitterApp;
 import com.example.twitterclient.handlers.AsyncStatusUpdateHandler;
 import com.example.twitterclient.handlers.CharsLeftHandler;
 import com.example.twitterclient.handlers.PostTweetActionHandler;
 import com.example.twitterclient.models.Tweet;
+import com.example.twitterclient.models.User;
 
 public class ComposeActivity extends Activity implements
 		PostTweetActionHandler.CanUpdateStatus,
@@ -35,6 +37,15 @@ public class ComposeActivity extends Activity implements
 				(TextView) findViewById(R.id.tvCharsLeft),
 				(Button) findViewById(R.id.btnPost)
 		));
+		checkReplyTo();
+	}
+
+	private void checkReplyTo() {
+		Long tweetId = getIntent().getLongExtra("reply_to_id", 0);
+		if (tweetId <= 0) return;
+		User user = Model.load(Tweet.class, tweetId).getUser();
+		String text = String.format("@%s ", user.screen_name);
+		etTweetText.setText(text);
 	}
 
 	public void updateStatus(View view) {

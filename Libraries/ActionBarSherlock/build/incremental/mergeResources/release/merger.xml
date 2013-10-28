@@ -1590,7 +1590,7 @@
 
 					<!--
              The default state of the SearchView. If true, it will be iconified when not in
-             use and expanded when clicked.
+			 use and expanded when clicked.
                     -->
 					<attr
 							name="iconifiedByDefault"
@@ -1614,10 +1614,10 @@
 							format="string"/>
 					<!--
              The drawable to show in the button for expanding the activities overflow popup.
-             <strong>Note:</strong> Clients would like to set this drawable
-             as a clue about the action the chosen activity will perform. For
-             example, if share activity is to be chosen the drawable should
-             give a clue that sharing is to be performed.
+			 <strong>Note:</strong> Clients would like to set this drawable
+			 as a clue about the action the chosen activity will perform. For
+			 example, if share activity is to be chosen the drawable should
+			 give a clue that sharing is to be performed.
                     -->
 					<attr
 							name="expandActivityOverflowButtonDrawable"
@@ -1657,20 +1657,20 @@
 					<attr name="android:popupBackground"/>
 					<!--
              Vertical offset from the spinner widget for positioning the dropdown in
-             spinnerMode="dropdown".
+			 spinnerMode="dropdown".
                     -->
 					<attr name="android:dropDownVerticalOffset"/>
 					<!--
              Horizontal offset from the spinner widget for positioning the dropdown
-             in spinnerMode="dropdown".
+			 in spinnerMode="dropdown".
                     -->
 					<attr name="android:dropDownHorizontalOffset"/>
 					<!-- Width of the dropdown in spinnerMode="dropdown". -->
 					<attr name="android:dropDownWidth"/>
 					<!--
              Reference to a layout to use for displaying a prompt in the dropdown for
-             spinnerMode="dropdown". This layout must contain a TextView with the id
-             @android:id/text1 to be populated with the prompt text.
+			 spinnerMode="dropdown". This layout must contain a TextView with the id
+			 @android:id/text1 to be populated with the prompt text.
                     -->
 					<attr name="android:popupPromptView"/>
 					<!-- Gravity setting for positioning the currently selected item. -->
@@ -1683,13 +1683,13 @@
 
 					<!--
              The category applied to all items within this group.
-             (This will be or'ed with the orderInCategory attribute.)
+			 (This will be or'ed with the orderInCategory attribute.)
                     -->
 					<attr name="android:menuCategory"/>
 
 					<!--
              The order within the category applied to all items within this group.
-             (This will be or'ed with the category attribute.)
+			 (This will be or'ed with the category attribute.)
                     -->
 					<attr name="android:orderInCategory"/>
 
@@ -1806,7 +1806,7 @@
 							format="dimension"/>
 					<!--
              Specifies padding that should be applied to the left and right sides of
-             system-provided items in the bar.
+			 system-provided items in the bar.
                     -->
 					<attr
 							name="itemPadding"
@@ -1877,28 +1877,28 @@
 							format="reference"/>
 					<!--
              Reference to a style for the split Action Bar. This style
-             controls the split component that holds the menu/action
-             buttons. actionBarStyle is still used for the primary
-             bar.
+			 controls the split component that holds the menu/action
+			 buttons. actionBarStyle is still used for the primary
+			 bar.
                     -->
 					<attr
 							name="actionBarSplitStyle"
 							format="reference"/>
 					<!--
              Reference to a theme that should be used to inflate widgets
-             and layouts destined for the action bar. Most of the time
-             this will be a reference to the current theme, but when
-             the action bar has a significantly different contrast
-             profile than the rest of the activity the difference
-             can become important. If this is set to @null the current
-             theme will be used.
+			 and layouts destined for the action bar. Most of the time
+			 this will be a reference to the current theme, but when
+			 the action bar has a significantly different contrast
+			 profile than the rest of the activity the difference
+			 can become important. If this is set to @null the current
+			 theme will be used.
                     -->
 					<attr
 							name="actionBarWidgetTheme"
 							format="reference"/>
 					<!--
              Size of the Action Bar, including the contextual
-             bar used to present Action Modes.
+			 bar used to present Action Modes.
                     -->
 					<attr
 							name="actionBarSize"
@@ -1917,7 +1917,7 @@
 							format="reference"/>
 					<!--
              TextAppearance style that will be applied to text that
-             appears within action menu items.
+			 appears within action menu items.
                     -->
 					<attr
 							name="actionMenuTextAppearance"
@@ -1977,7 +1977,7 @@
 
 					<!--
              This Drawable is overlaid over the foreground of the Window's content area, usually
-             to place a shadow below the title.
+			 to place a shadow below the title.
                     -->
 					<attr
 							name="windowContentOverlay"
@@ -2170,13 +2170,13 @@
 
 					<!--
              The category applied to the item.
-             (This will be or'ed with the orderInCategory attribute.)
+			 (This will be or'ed with the orderInCategory attribute.)
                     -->
 					<attr name="android:menuCategory"/>
 
 					<!--
              The order within the category applied to the item.
-             (This will be or'ed with the category attribute.)
+			 (This will be or'ed with the category attribute.)
                     -->
 					<attr name="android:orderInCategory"/>
 
@@ -2185,25 +2185,25 @@
 
 					<!--
              The condensed title associated with the item.  This is used in situations where the
-             normal title may be too long to be displayed.
+			 normal title may be too long to be displayed.
                     -->
 					<attr name="android:titleCondensed"/>
 
 					<!--
              The icon associated with this item.  This icon will not always be shown, so
-             the title should be sufficient in describing this item.
+			 the title should be sufficient in describing this item.
                     -->
 					<attr name="android:icon"/>
 
 					<!--
              The alphabetic shortcut key.  This is the shortcut when using a keyboard
-             with alphabetic keys.
+			 with alphabetic keys.
                     -->
 					<attr name="android:alphabeticShortcut"/>
 
 					<!--
              The numeric shortcut key.  This is the shortcut when using a numeric (e.g., 12-key)
-             keyboard.
+			 keyboard.
                     -->
 					<attr name="android:numericShortcut"/>
 
@@ -2212,7 +2212,7 @@
 
 					<!--
              Whether the item is checked.  Note that you must first have enabled checking with
-             the checkable attribute or else the check mark will not appear.
+			 the checkable attribute or else the check mark will not appear.
                     -->
 					<attr name="android:checked"/>
 
@@ -2224,7 +2224,7 @@
 
 					<!--
              Name of a method on the Context used to inflate the menu that will be
-             called when the item is clicked.
+			 called when the item is clicked.
                     -->
 					<attr name="android:onClick"/>
 
@@ -2233,23 +2233,23 @@
 
 					<!--
              An optional layout to be used as an action view.
-             See {@link android.view.MenuItem#setActionView(android.view.View)}
-             for more info.
+			 See {@link android.view.MenuItem#setActionView(android.view.View)}
+			 for more info.
                     -->
 					<attr name="android:actionLayout"/>
 
 					<!--
              The name of an optional View class to instantiate and use as an
-             action view. See {@link android.view.MenuItem#setActionView(android.view.View)}
-             for more info.
+			 action view. See {@link android.view.MenuItem#setActionView(android.view.View)}
+			 for more info.
                     -->
 					<attr name="android:actionViewClass"/>
 
 					<!--
              The name of an optional ActionProvider class to instantiate an action view
-             and perform operations such as default action for that menu item.
-             See {@link android.view.MenuItem#setActionProvider(android.view.ActionProvider)}
-             for more info.
+			 and perform operations such as default action for that menu item.
+			 See {@link android.view.MenuItem#setActionProvider(android.view.ActionProvider)}
+			 for more info.
                     -->
 					<attr name="android:actionProviderClass"/>
 				</declare-styleable>

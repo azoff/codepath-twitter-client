@@ -71,14 +71,30 @@
     <orderEntry type="jdk" jdkName="Android API 18 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="support-v4-18.0.0" level="project" />
-    <orderEntry type="library" exported="" name="android-async-http-1.4.3" level="project" />
-    <orderEntry type="library" exported="" name="universal-image-loader-1.8.4" level="project" />
-    <orderEntry type="library" exported="" name="codepath-oauth-0.2.4" level="project" />
-    <orderEntry type="library" exported="" name="activeandroid-3.0" level="project" />
-    <orderEntry type="library" exported="" name="codepath-utils" level="project" />
-    <orderEntry type="library" exported="" name="scribe" level="project" />
     <orderEntry type="module" module-name="PullToRefresh" exported="" />
     <orderEntry type="module" module-name="ActionBarSherlock" exported="" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES />
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/libs/activeandroid-3.0.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/libs" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/libs" />
+        </SOURCES>
+        <jarDirectory url="file://$MODULE_DIR$/libs" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/libs" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
   </component>
 </module>
 

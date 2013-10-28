@@ -1,7 +1,9 @@
 package com.example.twitterclient.apps;
 
+import android.content.Context;
 import com.activeandroid.ActiveAndroid;
 import com.activeandroid.app.Application;
+import com.example.twitterclient.models.User;
 import com.example.twitterclient.net.TwitterClient;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -12,7 +14,8 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
  */
 public class TwitterApp extends Application {
 
-	private static TwitterApp context;
+	private static Context context;
+	private static User user;
 
 	@Override
 	public void onCreate() {
@@ -46,6 +49,18 @@ public class TwitterApp extends Application {
 
 	public static TwitterClient getClient() {
 		return TwitterClient.getInstance(context);
+	}
+
+	public static Context getContext() {
+		return context;
+	}
+
+	public static User getCurrentUser() {
+		return user;
+	}
+
+	public static void setUser(User user) {
+		TwitterApp.user = user;
 	}
 
 }

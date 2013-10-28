@@ -4,7 +4,7 @@
 	<string name="app_name">Twitter Client</string>
 	<string name="title_activity_login">Log In to Twitter</string>
 	<string name="log_in_to_twitter">Log In To Twitter</string>
-	<string name="title_activity_timeline">My Timeline</string>
+	<string name="title_activity_timeline">Timelines</string>
 	<string name="action_settings">Settings</string>
 	<string name="hello_world">Hello world!</string>
 	<string name="profile_photo">profile photo</string>
@@ -16,5 +16,10 @@
 	<string name="post">Post</string>
 	<string name="home">Home</string>
 	<string name="mentions">Mentions</string>
+	<string name="profile">Profile</string>
+	<string name="verifying_account">Verifying Account...</string>
+	<string name="prefs_file">CurrentUserPrefs</string>
+	<string name="profile_menu_item">Profile</string>
+	<string name="reply">reply »</string>
 
 </resources>

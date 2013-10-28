@@ -24,12 +24,27 @@
 				android:textAppearance="?android:attr/textAppearanceSmall"
 				android:id="@+id/tvName"/>
 
-		<TextView
-				android:layout_marginBottom="@dimen/lv_item_spacing"
+		<LinearLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:textAppearance="?android:attr/textAppearanceSmall"
-				android:id="@+id/tvDate"/>
+				android:layout_marginBottom="@dimen/lv_item_spacing">
+
+			<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textAppearance="?android:attr/textAppearanceSmall"
+					android:id="@+id/tvDate"/>
+
+			<TextView
+					android:layout_marginLeft="10dp"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textAppearance="?android:attr/textAppearanceSmall"
+					android:text="@string/reply"
+					android:textColor="#ff0099cc"
+					android:id="@+id/tvReply"/>
+
+		</LinearLayout>
 
 		<TextView
 				android:layout_width="wrap_content"

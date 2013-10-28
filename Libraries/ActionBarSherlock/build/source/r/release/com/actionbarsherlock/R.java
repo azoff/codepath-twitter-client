@@ -21,7 +21,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static int actionBarItemBackground=0x7f010028;
         /** 
              Size of the Action Bar, including the contextual
-             bar used to present Action Modes.
+			 bar used to present Action Modes.
         
          <p>May be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
@@ -43,9 +43,9 @@ containing a value of this type.
         public static int actionBarSize=0x7f010026;
         /** 
              Reference to a style for the split Action Bar. This style
-             controls the split component that holds the menu/action
-             buttons. actionBarStyle is still used for the primary
-             bar.
+			 controls the split component that holds the menu/action
+			 buttons. actionBarStyle is still used for the primary
+			 bar.
         
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
@@ -71,12 +71,12 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static int actionBarTabTextStyle=0x7f010021;
         /** 
              Reference to a theme that should be used to inflate widgets
-             and layouts destined for the action bar. Most of the time
-             this will be a reference to the current theme, but when
-             the action bar has a significantly different contrast
-             profile than the rest of the activity the difference
-             can become important. If this is set to @null the current
-             theme will be used.
+			 and layouts destined for the action bar. Most of the time
+			 this will be a reference to the current theme, but when
+			 the action bar has a significantly different contrast
+			 profile than the rest of the activity the difference
+			 can become important. If this is set to @null the current
+			 theme will be used.
         
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
@@ -92,7 +92,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static int actionDropDownStyle=0x7f010052;
         /** 
              TextAppearance style that will be applied to text that
-             appears within action menu items.
+			 appears within action menu items.
         
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
@@ -230,10 +230,10 @@ containing a value of this type.
         public static int dropdownListPreferredItemHeight=0x7f010057;
         /** 
              The drawable to show in the button for expanding the activities overflow popup.
-             <strong>Note:</strong> Clients would like to set this drawable
-             as a clue about the action the chosen activity will perform. For
-             example, if share activity is to be chosen the drawable should
-             give a clue that sharing is to be performed.
+			 <strong>Note:</strong> Clients would like to set this drawable
+			 as a clue about the action the chosen activity will perform. For
+			 example, if share activity is to be chosen the drawable should
+			 give a clue that sharing is to be performed.
         
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
@@ -277,7 +277,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static int icon=0x7f01000a;
         /** 
              The default state of the SearchView. If true, it will be iconified when not in
-             use and expanded when clicked.
+			 use and expanded when clicked.
         
          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
@@ -319,7 +319,7 @@ containing a value of this type.
         public static int itemIconDisabledAlpha=0x7f01001b;
         /** 
              Specifies padding that should be applied to the left and right sides of
-             system-provided items in the bar.
+			 system-provided items in the bar.
         
          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
@@ -629,7 +629,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static int windowAnimationStyle=0x7f01001a;
         /** 
              This Drawable is overlaid over the foreground of the Window's content area, usually
-             to place a shadow below the title.
+			 to place a shadow below the title.
         
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
@@ -1028,7 +1028,7 @@ containing a value of this type.
            <tr><td><code>{@link #SherlockActionBar_indeterminateProgressStyle com.actionbarsherlock:indeterminateProgressStyle}</code></td><td> Specifies a style resource to use for an indeterminate progress spinner.</td></tr>
            <tr><td><code>{@link #SherlockActionBar_itemPadding com.actionbarsherlock:itemPadding}</code></td><td>
              Specifies padding that should be applied to the left and right sides of
-             system-provided items in the bar.</td></tr>
+			 system-provided items in the bar.</td></tr>
            <tr><td><code>{@link #SherlockActionBar_logo com.actionbarsherlock:logo}</code></td><td> Specifies the drawable used for the application logo.</td></tr>
            <tr><td><code>{@link #SherlockActionBar_navigationMode com.actionbarsherlock:navigationMode}</code></td><td> The type of navigation to use.</td></tr>
            <tr><td><code>{@link #SherlockActionBar_progressBarPadding com.actionbarsherlock:progressBarPadding}</code></td><td> Specifies the horizontal padding on either end for an embedded progress bar.</td></tr>
@@ -1213,7 +1213,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           @attr description
           
              Specifies padding that should be applied to the left and right sides of
-             system-provided items in the bar.
+			 system-provided items in the bar.
         
 
 
@@ -1487,10 +1487,10 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           @attr description
           
              The drawable to show in the button for expanding the activities overflow popup.
-             <strong>Note:</strong> Clients would like to set this drawable
-             as a clue about the action the chosen activity will perform. For
-             example, if share activity is to be chosen the drawable should
-             give a clue that sharing is to be performed.
+			 <strong>Note:</strong> Clients would like to set this drawable
+			 as a clue about the action the chosen activity will perform. For
+			 example, if share activity is to be chosen the drawable should
+			 give a clue that sharing is to be performed.
         
 
 
@@ -1571,7 +1571,7 @@ containing a value of this type.
           @attr description
           
              The category applied to all items within this group.
-             (This will be or'ed with the orderInCategory attribute.)
+			 (This will be or'ed with the orderInCategory attribute.)
         
           <p>This corresponds to the global attribute          resource symbol {@link com.actionbarsherlock.R.attr#android_menuCategory}.
           @attr name android:android_menuCategory
@@ -1582,7 +1582,7 @@ containing a value of this type.
           @attr description
           
              The order within the category applied to all items within this group.
-             (This will be or'ed with the category attribute.)
+			 (This will be or'ed with the category attribute.)
         
           <p>This corresponds to the global attribute          resource symbol {@link com.actionbarsherlock.R.attr#android_orderInCategory}.
           @attr name android:android_orderInCategory
@@ -1606,10 +1606,10 @@ containing a value of this type.
              An optional layout to be used as an action view.</td></tr>
            <tr><td><code>{@link #SherlockMenuItem_android_actionProviderClass com.actionbarsherlock:android_actionProviderClass}</code></td><td>
              The name of an optional ActionProvider class to instantiate an action view
-             and perform operations such as default action for that menu item.</td></tr>
+			 and perform operations such as default action for that menu item.</td></tr>
            <tr><td><code>{@link #SherlockMenuItem_android_actionViewClass com.actionbarsherlock:android_actionViewClass}</code></td><td>
              The name of an optional View class to instantiate and use as an
-             action view.</td></tr>
+			 action view.</td></tr>
            <tr><td><code>{@link #SherlockMenuItem_android_alphabeticShortcut com.actionbarsherlock:android_alphabeticShortcut}</code></td><td>
              The alphabetic shortcut key.</td></tr>
            <tr><td><code>{@link #SherlockMenuItem_android_checkable com.actionbarsherlock:android_checkable}</code></td><td> Whether the item is capable of displaying a check mark.</td></tr>
@@ -1625,7 +1625,7 @@ containing a value of this type.
              The numeric shortcut key.</td></tr>
            <tr><td><code>{@link #SherlockMenuItem_android_onClick com.actionbarsherlock:android_onClick}</code></td><td>
              Name of a method on the Context used to inflate the menu that will be
-             called when the item is clicked.</td></tr>
+			 called when the item is clicked.</td></tr>
            <tr><td><code>{@link #SherlockMenuItem_android_orderInCategory com.actionbarsherlock:android_orderInCategory}</code></td><td>
              The order within the category applied to the item.</td></tr>
            <tr><td><code>{@link #SherlockMenuItem_android_showAsAction com.actionbarsherlock:android_showAsAction}</code></td><td> How this item should display in the Action Bar, if present.</td></tr>
@@ -1664,8 +1664,8 @@ containing a value of this type.
           @attr description
           
              An optional layout to be used as an action view.
-             See {@link android.view.MenuItem#setActionView(android.view.View)}
-             for more info.
+			 See {@link android.view.MenuItem#setActionView(android.view.View)}
+			 for more info.
         
           <p>This corresponds to the global attribute          resource symbol {@link com.actionbarsherlock.R.attr#android_actionLayout}.
           @attr name android:android_actionLayout
@@ -1676,9 +1676,9 @@ containing a value of this type.
           @attr description
           
              The name of an optional ActionProvider class to instantiate an action view
-             and perform operations such as default action for that menu item.
-             See {@link android.view.MenuItem#setActionProvider(android.view.ActionProvider)}
-             for more info.
+			 and perform operations such as default action for that menu item.
+			 See {@link android.view.MenuItem#setActionProvider(android.view.ActionProvider)}
+			 for more info.
         
           <p>This corresponds to the global attribute          resource symbol {@link com.actionbarsherlock.R.attr#android_actionProviderClass}.
           @attr name android:android_actionProviderClass
@@ -1689,8 +1689,8 @@ containing a value of this type.
           @attr description
           
              The name of an optional View class to instantiate and use as an
-             action view. See {@link android.view.MenuItem#setActionView(android.view.View)}
-             for more info.
+			 action view. See {@link android.view.MenuItem#setActionView(android.view.View)}
+			 for more info.
         
           <p>This corresponds to the global attribute          resource symbol {@link com.actionbarsherlock.R.attr#android_actionViewClass}.
           @attr name android:android_actionViewClass
@@ -1701,7 +1701,7 @@ containing a value of this type.
           @attr description
           
              The alphabetic shortcut key.  This is the shortcut when using a keyboard
-             with alphabetic keys.
+			 with alphabetic keys.
         
           <p>This corresponds to the global attribute          resource symbol {@link com.actionbarsherlock.R.attr#android_alphabeticShortcut}.
           @attr name android:android_alphabeticShortcut
@@ -1720,7 +1720,7 @@ containing a value of this type.
           @attr description
           
              Whether the item is checked.  Note that you must first have enabled checking with
-             the checkable attribute or else the check mark will not appear.
+			 the checkable attribute or else the check mark will not appear.
         
           <p>This corresponds to the global attribute          resource symbol {@link com.actionbarsherlock.R.attr#android_checked}.
           @attr name android:android_checked
@@ -1739,7 +1739,7 @@ containing a value of this type.
           @attr description
           
              The icon associated with this item.  This icon will not always be shown, so
-             the title should be sufficient in describing this item.
+			 the title should be sufficient in describing this item.
         
           <p>This corresponds to the global attribute          resource symbol {@link com.actionbarsherlock.R.attr#android_icon}.
           @attr name android:android_icon
@@ -1758,7 +1758,7 @@ containing a value of this type.
           @attr description
           
              The category applied to the item.
-             (This will be or'ed with the orderInCategory attribute.)
+			 (This will be or'ed with the orderInCategory attribute.)
         
           <p>This corresponds to the global attribute          resource symbol {@link com.actionbarsherlock.R.attr#android_menuCategory}.
           @attr name android:android_menuCategory
@@ -1769,7 +1769,7 @@ containing a value of this type.
           @attr description
           
              The numeric shortcut key.  This is the shortcut when using a numeric (e.g., 12-key)
-             keyboard.
+			 keyboard.
         
           <p>This corresponds to the global attribute          resource symbol {@link com.actionbarsherlock.R.attr#android_numericShortcut}.
           @attr name android:android_numericShortcut
@@ -1780,7 +1780,7 @@ containing a value of this type.
           @attr description
           
              Name of a method on the Context used to inflate the menu that will be
-             called when the item is clicked.
+			 called when the item is clicked.
         
           <p>This corresponds to the global attribute          resource symbol {@link com.actionbarsherlock.R.attr#android_onClick}.
           @attr name android:android_onClick
@@ -1791,7 +1791,7 @@ containing a value of this type.
           @attr description
           
              The order within the category applied to the item.
-             (This will be or'ed with the category attribute.)
+			 (This will be or'ed with the category attribute.)
         
           <p>This corresponds to the global attribute          resource symbol {@link com.actionbarsherlock.R.attr#android_orderInCategory}.
           @attr name android:android_orderInCategory
@@ -1818,7 +1818,7 @@ containing a value of this type.
           @attr description
           
              The condensed title associated with the item.  This is used in situations where the
-             normal title may be too long to be displayed.
+			 normal title may be too long to be displayed.
         
           <p>This corresponds to the global attribute          resource symbol {@link com.actionbarsherlock.R.attr#android_titleCondensed}.
           @attr name android:android_titleCondensed
@@ -2020,7 +2020,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           @attr description
           
              The default state of the SearchView. If true, it will be iconified when not in
-             use and expanded when clicked.
+			 use and expanded when clicked.
         
 
 
@@ -2058,17 +2058,17 @@ containing a value of this type.
            <tr><th>Attribute</th><th>Description</th></tr>
            <tr><td><code>{@link #SherlockSpinner_android_dropDownHorizontalOffset com.actionbarsherlock:android_dropDownHorizontalOffset}</code></td><td>
              Horizontal offset from the spinner widget for positioning the dropdown
-             in spinnerMode="dropdown".</td></tr>
+			 in spinnerMode="dropdown".</td></tr>
            <tr><td><code>{@link #SherlockSpinner_android_dropDownSelector com.actionbarsherlock:android_dropDownSelector}</code></td><td> List selector to use for spinnerMode="dropdown" display.</td></tr>
            <tr><td><code>{@link #SherlockSpinner_android_dropDownVerticalOffset com.actionbarsherlock:android_dropDownVerticalOffset}</code></td><td>
              Vertical offset from the spinner widget for positioning the dropdown in
-             spinnerMode="dropdown".</td></tr>
+			 spinnerMode="dropdown".</td></tr>
            <tr><td><code>{@link #SherlockSpinner_android_dropDownWidth com.actionbarsherlock:android_dropDownWidth}</code></td><td> Width of the dropdown in spinnerMode="dropdown".</td></tr>
            <tr><td><code>{@link #SherlockSpinner_android_gravity com.actionbarsherlock:android_gravity}</code></td><td> Gravity setting for positioning the currently selected item.</td></tr>
            <tr><td><code>{@link #SherlockSpinner_android_popupBackground com.actionbarsherlock:android_popupBackground}</code></td><td> Background drawable to use for the dropdown in spinnerMode="dropdown".</td></tr>
            <tr><td><code>{@link #SherlockSpinner_android_popupPromptView com.actionbarsherlock:android_popupPromptView}</code></td><td>
              Reference to a layout to use for displaying a prompt in the dropdown for
-             spinnerMode="dropdown".</td></tr>
+			 spinnerMode="dropdown".</td></tr>
            <tr><td><code>{@link #SherlockSpinner_android_prompt com.actionbarsherlock:android_prompt}</code></td><td> The prompt to display when the spinner's dialog is shown.</td></tr>
            </table>
            @see #SherlockSpinner_android_dropDownHorizontalOffset
@@ -2089,7 +2089,7 @@ containing a value of this type.
           @attr description
           
              Horizontal offset from the spinner widget for positioning the dropdown
-             in spinnerMode="dropdown".
+			 in spinnerMode="dropdown".
         
           <p>This corresponds to the global attribute          resource symbol {@link com.actionbarsherlock.R.attr#android_dropDownHorizontalOffset}.
           @attr name android:android_dropDownHorizontalOffset
@@ -2108,7 +2108,7 @@ containing a value of this type.
           @attr description
           
              Vertical offset from the spinner widget for positioning the dropdown in
-             spinnerMode="dropdown".
+			 spinnerMode="dropdown".
         
           <p>This corresponds to the global attribute          resource symbol {@link com.actionbarsherlock.R.attr#android_dropDownVerticalOffset}.
           @attr name android:android_dropDownVerticalOffset
@@ -2143,8 +2143,8 @@ containing a value of this type.
           @attr description
           
              Reference to a layout to use for displaying a prompt in the dropdown for
-             spinnerMode="dropdown". This layout must contain a TextView with the id
-             @android:id/text1 to be populated with the prompt text.
+			 spinnerMode="dropdown". This layout must contain a TextView with the id
+			 @android:id/text1 to be populated with the prompt text.
         
           <p>This is a private symbol.
           @attr name android:android_popupPromptView
@@ -2168,7 +2168,7 @@ containing a value of this type.
            <tr><td><code>{@link #SherlockTheme_actionBarItemBackground com.actionbarsherlock:actionBarItemBackground}</code></td><td> Custom item state list drawable background for action bar items.</td></tr>
            <tr><td><code>{@link #SherlockTheme_actionBarSize com.actionbarsherlock:actionBarSize}</code></td><td>
              Size of the Action Bar, including the contextual
-             bar used to present Action Modes.</td></tr>
+			 bar used to present Action Modes.</td></tr>
            <tr><td><code>{@link #SherlockTheme_actionBarSplitStyle com.actionbarsherlock:actionBarSplitStyle}</code></td><td>
              Reference to a style for the split Action Bar.</td></tr>
            <tr><td><code>{@link #SherlockTheme_actionBarStyle com.actionbarsherlock:actionBarStyle}</code></td><td> Reference to a style for the Action Bar </td></tr>
@@ -2177,12 +2177,12 @@ containing a value of this type.
            <tr><td><code>{@link #SherlockTheme_actionBarTabTextStyle com.actionbarsherlock:actionBarTabTextStyle}</code></td><td></td></tr>
            <tr><td><code>{@link #SherlockTheme_actionBarWidgetTheme com.actionbarsherlock:actionBarWidgetTheme}</code></td><td>
              Reference to a theme that should be used to inflate widgets
-             and layouts destined for the action bar.</td></tr>
+			 and layouts destined for the action bar.</td></tr>
            <tr><td><code>{@link #SherlockTheme_actionButtonStyle com.actionbarsherlock:actionButtonStyle}</code></td><td></td></tr>
            <tr><td><code>{@link #SherlockTheme_actionDropDownStyle com.actionbarsherlock:actionDropDownStyle}</code></td><td></td></tr>
            <tr><td><code>{@link #SherlockTheme_actionMenuTextAppearance com.actionbarsherlock:actionMenuTextAppearance}</code></td><td>
              TextAppearance style that will be applied to text that
-             appears within action menu items.</td></tr>
+			 appears within action menu items.</td></tr>
            <tr><td><code>{@link #SherlockTheme_actionMenuTextColor com.actionbarsherlock:actionMenuTextColor}</code></td><td> Color for text that appears within action menu items.</td></tr>
            <tr><td><code>{@link #SherlockTheme_actionModeBackground com.actionbarsherlock:actionModeBackground}</code></td><td> Background drawable to use for action mode UI </td></tr>
            <tr><td><code>{@link #SherlockTheme_actionModeCloseButtonStyle com.actionbarsherlock:actionModeCloseButtonStyle}</code></td><td></td></tr>
@@ -2235,7 +2235,7 @@ containing a value of this type.
            <tr><td><code>{@link #SherlockTheme_windowActionModeOverlay com.actionbarsherlock:windowActionModeOverlay}</code></td><td></td></tr>
            <tr><td><code>{@link #SherlockTheme_windowContentOverlay com.actionbarsherlock:windowContentOverlay}</code></td><td>
              This Drawable is overlaid over the foreground of the Window's content area, usually
-             to place a shadow below the title.</td></tr>
+			 to place a shadow below the title.</td></tr>
            <tr><td><code>{@link #SherlockTheme_windowMinWidthMajor com.actionbarsherlock:windowMinWidthMajor}</code></td><td></td></tr>
            <tr><td><code>{@link #SherlockTheme_windowMinWidthMinor com.actionbarsherlock:windowMinWidthMinor}</code></td><td></td></tr>
            <tr><td><code>{@link #SherlockTheme_windowNoTitle com.actionbarsherlock:windowNoTitle}</code></td><td></td></tr>
@@ -2357,7 +2357,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           @attr description
           
              Size of the Action Bar, including the contextual
-             bar used to present Action Modes.
+			 bar used to present Action Modes.
         
 
 
@@ -2386,9 +2386,9 @@ containing a value of this type.
           @attr description
           
              Reference to a style for the split Action Bar. This style
-             controls the split component that holds the menu/action
-             buttons. actionBarStyle is still used for the primary
-             bar.
+			 controls the split component that holds the menu/action
+			 buttons. actionBarStyle is still used for the primary
+			 bar.
         
 
 
@@ -2447,12 +2447,12 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           @attr description
           
              Reference to a theme that should be used to inflate widgets
-             and layouts destined for the action bar. Most of the time
-             this will be a reference to the current theme, but when
-             the action bar has a significantly different contrast
-             profile than the rest of the activity the difference
-             can become important. If this is set to @null the current
-             theme will be used.
+			 and layouts destined for the action bar. Most of the time
+			 this will be a reference to the current theme, but when
+			 the action bar has a significantly different contrast
+			 profile than the rest of the activity the difference
+			 can become important. If this is set to @null the current
+			 theme will be used.
         
 
 
@@ -2487,7 +2487,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           @attr description
           
              TextAppearance style that will be applied to text that
-             appears within action menu items.
+			 appears within action menu items.
         
 
 
@@ -3127,7 +3127,7 @@ containing a value of this type.
           @attr description
           
              This Drawable is overlaid over the foreground of the Window's content area, usually
-             to place a shadow below the title.
+			 to place a shadow below the title.
         
 
 

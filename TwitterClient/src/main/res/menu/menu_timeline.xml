@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-	<item android:icon="@drawable/ic_action_content_edit"
+	<item android:icon="@drawable/ic_action_profile"
+	      android:title="@string/profile_menu_item"
+	      android:showAsAction="ifRoom"
+	      android:onClick="startCurrentProfileActivity"/>
+	<item android:icon="@drawable/ic_action_compose"
 	      android:title="@string/compose_tweet"
 	      android:showAsAction="ifRoom"
 	      android:onClick="startComposeActivity"/>

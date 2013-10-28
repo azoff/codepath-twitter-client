@@ -6,6 +6,7 @@ import com.activeandroid.ActiveAndroid;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.activeandroid.query.From;
 import com.activeandroid.query.Select;
 import com.example.twitterclient.utils.TwitterDateUtil;
 import org.json.JSONArray;
@@ -31,14 +32,22 @@ public class Tweet extends Model {
 	@Column(name = "created_date")
 	public Date created_date;
 
-	@Column(name = "tweet_id")
+	@Column(name = "tweet_id", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
 	public Long tweet_id;
 
-	@Column(name = "user")
-	public User user;
+	@Column(name = "user_id")
+	public Long user_id;
+	private User user;
+
+	@Column(name = "mentioned")
+	public Boolean mentioned;
 
 	public Tweet() {
 		super();
+	}
+
+	public User getUser() {
+		return user != null ? user : User.fromUserId(user_id);
 	}
 
 	public Spanned getSpannedText() {
@@ -58,33 +67,69 @@ public class Tweet extends Model {
 
 	public static Tweet fromJsonObject(JSONObject jsonObject)
 			throws JSONException, ParseException {
+		return fromJsonObject(jsonObject, null);
+	}
+
+	public static Tweet fromJsonObject(JSONObject jsonObject, User toCheckForMentions)
+			throws JSONException, ParseException {
+
 		Tweet tweet = new Tweet();
-		User user = User.fromJsonObject(jsonObject.getJSONObject("user"));
+		tweet.user = User.fromJsonObject(jsonObject.getJSONObject("user"));
+		tweet.user_id = tweet.user.user_id;
 		tweet.text = jsonObject.getString("text");
 		tweet.tweet_id = jsonObject.getLong("id");
-		tweet.user = user;
 		tweet.created_date = TwitterDateUtil.toDate(jsonObject.getString("created_at"));
+		tweet.mentioned = false;
+
+		if (toCheckForMentions != null) {
+			JSONArray userMentions = jsonObject.getJSONObject("entities").getJSONArray("user_mentions");
+			for (int i = 0; i < userMentions.length(); i++) {
+				JSONObject userMention = userMentions.getJSONObject(i);
+				if (toCheckForMentions.user_id.equals(userMention.getInt("id"))) {
+					tweet.mentioned = true;
+					break;
+				}
+			}
+		}
+
 		tweet.save();
 		return tweet;
+
 	}
 
 	public static List<Tweet> fromJsonArray(JSONArray jsonArray)
 			throws JSONException, ParseException {
-		ActiveAndroid.beginTransaction();
+		return fromJsonArray(jsonArray, null);
+	}
+
+	public static List<Tweet> fromJsonArray(JSONArray jsonArray, User toCheckForMentions)
+			throws JSONException, ParseException {
 		List<Tweet> tweets = new ArrayList<Tweet>();
+		ActiveAndroid.beginTransaction();
 		for (int i = 0; i < jsonArray.length(); i++)
-			tweets.add(fromJsonObject(jsonArray.getJSONObject(i)));
+			tweets.add(fromJsonObject(jsonArray.getJSONObject(i), toCheckForMentions));
 		ActiveAndroid.setTransactionSuccessful();
 		ActiveAndroid.endTransaction();
 		return tweets;
 	}
 
-	public static List<Tweet> selectRecent(int limit) {
+	public static From getRecentFrom(Integer limit) {
 		return new Select()
 				.from(Tweet.class)
 				.orderBy("created_date DESC")
-				.limit(String.valueOf(limit))
-				.execute();
+				.limit(limit.toString());
+	}
+
+	public static List<Tweet> getRecentTweets(Integer limit) {
+		return getRecentFrom(limit).execute();
+	}
+
+	public static List<Tweet> getRecentMentions(Integer limit) {
+		return getRecentFrom(limit).where("mentioned = ?", true).execute();
+	}
+
+	public static List<Tweet> getRecentUserTweets(Integer limit, User currentUser) {
+		return getRecentFrom(limit).where("user_id = ?", currentUser.user_id).execute();
 	}
 
 	public static class ByDateCreatedDesc implements Comparator<Tweet> {
